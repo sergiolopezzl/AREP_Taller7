@@ -78,7 +78,7 @@ https://localhost:8080/index.html
 * Entre a la pagina mediante este link si esta la instancia EC2:
 
 ```
-http://ec2-3-84-133-29.compute-1.amazonaws.com:38000/index.html
+https://ec2-3-93-43-143.compute-1.amazonaws.com:8080/index.html
 ```
 
 
