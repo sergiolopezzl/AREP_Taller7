@@ -12,8 +12,21 @@ import java.util.*;
 
 import static spark.Spark.*;
 
+/**
+ * Clase que proporciona un servicio de autenticación mediante un servicio remoto.
+ */
 public class LoginService {
 
+    /**
+     * Método principal para iniciar el servicio de autenticación.
+     *
+     * @param args Argumentos de línea de comandos (no se utilizan).
+     * @throws NoSuchAlgorithmException Si el algoritmo requerido no está disponible.
+     * @throws KeyStoreException Si se produce un error en el almacén de claves.
+     * @throws IOException Si se produce un error de entrada/salida.
+     * @throws KeyManagementException Si se produce un error en la gestión de claves.
+     * @throws CertificateException Si se produce un error en la certificación.
+     */
     public static void main(String[] args) throws NoSuchAlgorithmException, KeyStoreException, IOException, KeyManagementException, CertificateException {
         staticFiles.location("/public");
         port(getPort());
@@ -25,10 +38,24 @@ public class LoginService {
         });
     }
 
+    /**
+     * Obtiene el puerto en el que se ejecutará el servicio. Utiliza el puerto 8080 si no se especifica uno.
+     *
+     * @return El puerto en el que se ejecutará el servicio.
+     */
     public static int getPort() {
         return Optional.ofNullable(System.getenv("PORT")).map(Integer::parseInt).orElse(8080);
     }
 
+    /**
+     * Configura el contexto SSL confiable para establecer una conexión segura.
+     *
+     * @throws KeyStoreException Si se produce un error en el almacén de claves.
+     * @throws IOException Si se produce un error de entrada/salida.
+     * @throws NoSuchAlgorithmException Si el algoritmo requerido no está disponible.
+     * @throws KeyManagementException Si se produce un error en la gestión de claves.
+     * @throws CertificateException Si se produce un error en la certificación.
+     */
     private static void configureTrustedSSLContext() throws KeyStoreException, IOException, NoSuchAlgorithmException, KeyManagementException, CertificateException {
         File trustStoreFile = new File("certificados/myTrustStore.p12");
         char[] trustStorePassword = "123456".toCharArray();
@@ -44,6 +71,13 @@ public class LoginService {
         SSLContext.setDefault(sslContext);
     }
 
+    /**
+     * Realiza una solicitud HTTP GET a una URL y devuelve la respuesta como una cadena de texto.
+     *
+     * @param query Los parámetros de la consulta a agregar a la URL.
+     * @return La respuesta obtenida como una cadena de texto.
+     * @throws IOException Si se produce un error de entrada/salida.
+     */
     public static String readURL(String query) throws IOException {
         URL siteURL = new URL("https://localhost:8088/user?" + query);
         URLConnection urlConnection = siteURL.openConnection();
