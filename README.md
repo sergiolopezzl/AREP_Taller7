@@ -42,13 +42,13 @@ framework para manejar las solicitudes HTTP entrantes y salientes.
 * Clone el repositorio desde GitHub:
 
 ```
-git clone https://github.com/sergiolopezzl/AREP_Taller6.git
+git clone https://github.com/sergiolopezzl/AREP_Taller7.git
 ```
 
 * Navegue al directorio del proyecto: 
 
 ```
-cd AREP_Taller6
+cd AREP_Taller7
 ```
 
 * Compile el proyecto y descargue las dependencias con Maven: 
@@ -57,22 +57,22 @@ cd AREP_Taller6
 mvn clean package
 ```
 
-* Ejecuta los servicios de docker-compose.yml con el siguiente comando: 
+* Ejecuta el 1 servicio con el siguiente comando: 
 
 ```
-docker-compose up -d
+mvn exec:java '-Dexec.mainClass=com.example.login.LoginService'
 ```
 
-* Mirar si estan los contenedores corriendo el siguiente comando:
+* Ejecuta el 2 servicio con el siguiente comando: :
 
 ```
-docker ps
+mvn exec:java '-Dexec.mainClass=com.example.login.UsersService'
 ```
 
 * Entre a la pagina mediante este link si es Localmente:
 
 ```
-http://localhost:38000/index.html
+https://localhost:8080/index.html
 ```
 
 * Entre a la pagina mediante este link si esta la instancia EC2:
