@@ -2,41 +2,27 @@
 
 # AREP_Taller7
 
+
 ## Introducción
 
-El código proporcionado es parte de una aplicación de servicio de registro (LogService) 
-que utiliza MongoDB como base de datos para almacenar registros. La aplicación consta de 
-varias clases que interactúan para permitir la adición de registros a la base de datos y 
-la recuperación de los registros almacenados. Además, hay una clase llamada ServiceInvoker 
-que se utiliza para invocar servicios de registro externos. El objetivo general de la 
-aplicación parece ser proporcionar un servicio centralizado para el registro de eventos 
-o mensajes.
+El sistema de autenticación desarrollado consta de dos clases principales: `LoginService` y `UsersService`. Estas 
+clases forman parte de un servicio que permite a los usuarios iniciar sesión mediante un servidor remoto.
 
 ## Características y Funcionalidades:
 
-* **LogList:** Esta clase se utiliza para manejar la lista de registros. Permite agregar nuevos registros a la base de datos MongoDB y recuperar una lista de los últimos registros ordenados por fecha. Los registros se representan como documentos JSON en la base de datos.
-
-* **LogService:** Es la clase principal que inicia el servicio de registro. Utiliza Spark framework para manejar las solicitudes HTTP entrantes. Cuando recibe una solicitud GET en la ruta '/service', agrega un nuevo registro a la base de datos utilizando la fecha actual y el mensaje proporcionado en los parámetros de la solicitud. Luego devuelve una lista de registros en formato JSON como respuesta.
-
-* **LogServiceFacade:** Esta clase también inicia un servicio de registro, pero actúa como un intermediario entre el cliente y los servicios de registro externos. Utiliza Spark framework para manejar las solicitudes HTTP entrantes en la ruta '/logs'. La clase invoca servicios de registro externos utilizando la clase ServiceInvoker y devuelve la respuesta al cliente.
-
-* **MongoDBconnection:** Es una clase de utilidad que proporciona una conexión a la base de datos MongoDB.
-
-* **ServiceInvoker:** Esta clase se utiliza para invocar servicios de registro externos. Recibe un array de URLs de servicios de registro y, cuando se invoca, realiza una solicitud GET a la URL correspondiente, pasando un mensaje como parámetro en la solicitud. Luego devuelve la respuesta del servicio de registro externo.
-
+- **Autenticación de Usuarios**: Permite a los usuarios iniciar sesión utilizando un nombre de usuario y una contraseña.
+- **Cifrado de Contraseñas**: Las contraseñas de los usuarios se almacenan cifradas utilizando el algoritmo SHA-256.
+- **Seguridad SSL/TLS**: Se utiliza un contexto SSL seguro para establecer conexiones seguras entre el cliente y el servidor.
+- **Configuración de Puerto**: Permite configurar el puerto en el que se ejecutará el servicio, con un valor predeterminado de 8080 para `LoginService` y 8088 para `UsersService`.
+- **Interfaz RESTful**: Utiliza Spark para proporcionar una interfaz RESTful que maneja las solicitudes de autenticación.
 
 ## Arquitectura
 
-La arquitectura de la aplicación es una arquitectura basada en microservicios,
-donde cada microservicio se encarga de una función específica. Hay un servicio de
-registro principal (LogService) que gestiona las solicitudes internas y otro
-servicio de fachada (LogServiceFacade) que gestiona las solicitudes externas y
-actúa como un intermediario. Además, hay un servicio de invocación (ServiceInvoker)
-que se utiliza para comunicarse con servicios de registro externos. La base de datos
-MongoDB se utiliza para almacenar los registros. La aplicación utiliza Spark
-framework para manejar las solicitudes HTTP entrantes y salientes.
-
-
+El sistema sigue una arquitectura cliente-servidor, donde el cliente realiza solicitudes de autenticación al servidor 
+a través de una conexión segura. El servidor responde a estas solicitudes verificando las credenciales proporcionadas 
+por el cliente y devolviendo un resultado de autenticación en formato JSON. El cifrado de las contraseñas garantiza la 
+seguridad de las credenciales almacenadas en el servidor. Además, la configuración de SSL/TLS asegura la integridad y 
+la confidencialidad de las comunicaciones entre el cliente y el servidor.
 
 ## Instrucciones de Ejecución
 * Clone el repositorio desde GitHub:
@@ -86,21 +72,19 @@ https://ec2-3-93-43-143.compute-1.amazonaws.com:8080/index.html
 
 ### Pruebas
 
-* Video
+# Video
 
-[![Video](https://img.youtube.com/vi/BXyCjFyGHB0/sddefault.jpg)](https://www.youtube.com/watch?v=BXyCjFyGHB0)
+[![Video](https://img.youtube.com/vi/haHc01DqGTo/sddefault.jpg)](https://www.youtube.com/watch?v=haHc01DqGTo)
 
-* AWS
-
+# Imagenes
+### Login 1
 ![prueba1.png](src/main/resources/public/img/prueba1.png)
-
-* LOCAL
-
+### Login 2
+![prueba2.png](src/main/resources/public/img/prueba2.png)
+### Login Incorrecto
 ![prueba3.png](src/main/resources/public/img/prueba3.png)
-
-* Pruebas unitarias
-
-![prueba72.png](src/main/resources/public/img/prueba2.png)
+### Pruebas unitarias
+![prueba4.png](src/main/resources/public/img/prueba4.png)
 
 
 
